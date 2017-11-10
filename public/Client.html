@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Small Chat</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.5.0/css/bulma.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+<section class="hero  is-primary is-bold">
+    <div class="hero-body">
+        <div class="container">
+            <h1 class="title ">
+                Welcome Small Chat
+            </h1>
+            <h2 class="subtitle">
+                This is popular
+            </h2>
+        </div>
+    </div>
+</section>
+
+<br>
+<!--内容-->
+<div class="columns">
+
+    <div class="column is-2 is-offset-1">
+        <div class="box box_margin_none">
+            <p class="subtitle is-6 padding">在线成员:</p>
+            <ul class="client_user" id="client_user_list">
+            </ul>
+        </div>
+    </div>
+
+
+    <div class="column is-8">
+        <div class="column is-12 box">
+            <p class="subtitle is-6" id="warning_error"></p>
+            <div class="control field">
+                <textarea id="content" rows="2" style="resize: none" required name="body" class="textarea font-small"
+                          placeholder="发送消息"></textarea>
+            </div>
+            <button id="send_message" type="submit" class="button  is-primary">发送</button>
+        </div>
+
+        <br>
+        <div class="column box is-12" style="padding: 20px 10px">
+            <h3 class="title is-6" style="font-weight: 400">聊天记录</h3>
+            <div id="article_content">
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="//cdn.bootcss.com/jquery/2.1.0/jquery.min.js"></script>
+<script src="js/bulma.js"></script>
+<script src="js/ChatClient.js"></script>
+</body>
+</html>

@@ -1,0 +1,20 @@
+{
+    "name": "laravelchen/chart",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "LaravelChen",
+            "email": "848407695@qq.com"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "Chat\\": "src/"
+        }
+    },
+    "require-dev": {
+        "eaglewu/swoole-ide-helper": "dev-master"
+    }
+}
