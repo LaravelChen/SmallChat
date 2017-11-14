@@ -8,7 +8,9 @@
             "email": "848407695@qq.com"
         }
     ],
-    "require": {},
+    "require": {
+        "predis/predis": "^1.1"
+    },
     "autoload": {
         "psr-4": {
             "Chat\\": "src/"

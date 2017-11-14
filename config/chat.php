@@ -1,15 +1,15 @@
 <?php
 return [
-    'ip'    =>'0.0.0.0',
-    'port'  => '9502',
+    'ip' => '0.0.0.0',
+    'port' => '9502',
 
-    'name'=>[
+    'name' => [
         'LaravelChen',
         'JellyBool',
         'Jeffery',
-        'Taylor'
+        'Taylor',
     ],
-    'avatar'=>[
-        'https://photo.laravelchen.cn/1_1506468431avatar.jpeg'
+    'avatar' => [
+        'https://photo.laravelchen.cn/1_1506468431avatar.jpeg',
     ],
 ];

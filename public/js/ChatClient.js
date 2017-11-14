@@ -7,6 +7,9 @@ $(function () {
     $("#send_message").click(function () {
         chat.sendMsg();
     });
+    $("#send_private_message").click(function () {
+        chat.sendPrivateMessage();
+    });
 });
 var config = {
     server: "ws://127.0.0.1:9502",
@@ -15,7 +18,7 @@ var config = {
 var chat = {
     data: {
         Client: null,
-        info: {}
+        to_user_fd: null
     },
     init: function () {
         this.data.Client = new WebSocket(config.server);
@@ -41,8 +44,12 @@ var chat = {
                     chat.removeUser(server_data.user);
                     chat.showMessage(server_data.message);
                     break;
-                case 'message':
+                case 'public_message':
                     chat.showMessage(JSON.parse(server_data.message));
+                    break;
+                case 'private_message':
+                    console.log(server_data.message);
+                    chat.showPrivateMessage(server_data.message);
                     break;
                 case 'openSuccess':
                     chat.showUsersList(server_data.all);
@@ -66,10 +73,16 @@ var chat = {
         $("#warning_error").html('<span  style="color:' + level + ' ">' + msg + '</span>');
     },
     showMessage: function (msg) {
-        message='<article class="media"> <div class="media-left"> <figure class="image is-48x48"> ' +
-            '<img class="is-circle is-circle-o" src="'+msg.user.avatar+'" alt="Image"> </figure> </div>' +
-            ' <div class="media-content"> <div class="content"> <p> <strong class="color_green">'+msg.user.name+'</strong> <br>'+msg.data+' </p> </div> </div> </article>';
+        message = '<article class="media"> <div class="media-left"> <figure class="image is-48x48"> ' +
+            '<img class="is-circle is-circle-o" src="' + msg.user.avatar + '"> </figure> </div>' +
+            ' <div class="media-content"> <div class="content"> <p> <strong class="color_green">' + msg.user.name + '</strong> <br>' + msg.data + ' </p> </div> </div> </article>';
         $("#article_content").append(message);
+    },
+    showPrivateMessage: function (msg) {
+        message = '<article class="media"> <div class="media-left"> <figure class="image is-48x48"> ' +
+            '<img class="is-circle is-circle-o" src="' + msg.user.avatar + '"></figure> </div>' +
+            ' <div class="media-content"> <div class="content"><p><strong class="color_green">' + msg.user.name + '</strong> <br>' + msg.data + '</p></div> </div> </article>';
+        $("#private_article_content").append(message);
     },
     appendUser: function (msg) {
         message = chat.userListHtml(msg);
@@ -82,24 +95,36 @@ var chat = {
         }
     },
     removeUser: function (msg) {
+        console.log(msg.fd);
         $(".fd-" + msg.fd).remove();
     },
     userListHtml: function (msg) {
-        return message = '<li class="fd-"' +msg.fd + '> <div class="dropdown is-hoverable width_100"> <div class="dropdown-trigger"> <div class="media"> <div class="media-left"> <img src="' + msg.avatar + '"class="image is-35x35 is-circle is-circle-o"> </div>' +
+        return message = '<li class="fd-' + msg.fd + '"> <div class="dropdown is-hoverable width_100"> <div class="dropdown-trigger"> <div class="media"> <div class="media-left"> <img src="' + msg.avatar + '"class="image is-35x35 is-circle is-circle-o"> </div>' +
             ' <div class="media-content hidder_100"> <p class="subtitle is-6 margin_top_6">' + msg.name + '</p> </div> </div>' +
             ' </div> <div class="dropdown-menu" id="dropdown-menu3" role="menu"> ' +
-            '<div class="dropdown-content"> <a onclick="chat.chatSingle()" class="dropdown-item"> 私聊 </a> </div> </div> </div> </li>';
+            '<div class="dropdown-content"> <a onclick="chat.chatSingle(' + msg.fd + ')" class="dropdown-item"> 私聊 </a> </div> </div> </div> </li>';
     },
     sendMsg: function () {
         var content = $("#content").val();
+        var data = {"type": "public", "data": {"message": content}};
         if (content) {
             //发送内容
-            this.data.Client.send(content);
+            this.data.Client.send(JSON.stringify(data));
             $("#content").val("");
         }
     },
-    chatSingle:function (msg) {
-        console.log(msg);
-    }
+    sendPrivateMessage: function () {
+        var content = $("#private_content").val();
+        var data = {"type": "private", "data": {"message": content, "to_user_fd": this.data.to_user_fd}};
+        if (content) {
+            //发送内容
+            this.data.Client.send(JSON.stringify(data));
+        }
+        $("#private_content").val("");
+    },
+    chatSingle: function (to_user_fd) {
+        $(".modal").addClass("is-active");
+        this.data.to_user_fd = to_user_fd;
+    },
 }
 

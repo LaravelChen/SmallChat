@@ -11,6 +11,10 @@ class ComposerStaticInitb86d2e666bacaf5be9b23d8c3062d6dd
         array (
             'Swoole\\' => 7,
         ),
+        'P' => 
+        array (
+            'Predis\\' => 7,
+        ),
         'C' => 
         array (
             'Chat\\' => 5,
@@ -21,6 +25,10 @@ class ComposerStaticInitb86d2e666bacaf5be9b23d8c3062d6dd
         'Swoole\\' => 
         array (
             0 => __DIR__ . '/..' . '/eaglewu/swoole-ide-helper/src',
+        ),
+        'Predis\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/predis/predis/src',
         ),
         'Chat\\' => 
         array (

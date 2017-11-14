@@ -8,6 +8,29 @@
 </head>
 
 <body>
+<!--私人聊天室-->
+<div class="modal">
+    <div class="modal-background"></div>
+    <div class="modal-card">
+        <header class="modal-card-head">
+            <p class="modal-card-title">Jelly</p>
+            <button class="delete"></button>
+        </header>
+        <section class="modal-card-body">
+            <div class="content" id="private_" style="min-height: 200px">
+            </div>
+        </section>
+        <footer class="modal-card-foot" style="padding-bottom: 0;padding-top: 0">
+            <div class="column is-12 ">
+                <textarea id="private_content" rows="2" style="resize: none" required name="body"
+                          class="textarea font-small"
+                          placeholder="发送消息"></textarea>
+                <a style="margin-top: 10px" id="send_private_message" class="a_btn is-primary">发送</a>
+            </div>
+        </footer>
+    </div>
+</div>
+
 <section class="hero  is-primary is-bold">
     <div class="hero-body">
         <div class="container">
@@ -46,8 +69,8 @@
 
         <br>
         <div class="column box is-12" style="padding: 20px 10px">
-            <h3 class="title is-6" style="font-weight: 400">聊天记录</h3>
-            <div id="article_content">
+            <h3 class="title is-6" style="font-weight: 400;">聊天记录</h3>
+            <div id="article_content" style="max-height: 400px;overflow-y: scroll;">
             </div>
         </div>
     </div>
