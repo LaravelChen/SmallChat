@@ -64,8 +64,8 @@ class ChatServer
             'type' => 'openSuccess',
         ]));
 
-        $this->redis->set($request->fd, json_encode($user));
-        var_dump($this->redis->get($request->fd));
+//        $this->redis->set($request->fd, json_encode($user));
+//        var_dump($this->redis->get($request->fd));
 
         //群发消息
         $this->pushMessage($ws, $user['name'] . '进入聊天室', 'open', $request->fd);
